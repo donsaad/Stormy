@@ -1,0 +1,30 @@
+# Gradle generated files
+.gradle
+
+# Built application files
+/*/build/
+/build
+
+# Local configuration file (sdk path, etc)
+/local.properties
+
+# User-specific configurations
+/.idea/workspace.xml
+/.idea/libraries
+*.iml
+.idea/compiler.xml
+.idea/copyright/profiles_settings.xml
+.idea/scopes/scope_settings.xml
+.idea/tasks.xml
+.idea/.name
+.idea/vcs.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+
+# Signing files
+.signing/
+
+# OS-specific files
+.DS_Store
+.DS_Store?
