@@ -13,6 +13,9 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 
@@ -21,6 +24,7 @@ public class MainActivity extends Activity {
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final String ERROR_DATA = "data_exception";
     public static final String ERROR_NETWORK = "network_unavailable";
+    private CurrentWeather mCurrentWeather;
 
 
     @Override
@@ -52,13 +56,18 @@ public class MainActivity extends Activity {
                 public void onResponse(Response response) throws IOException {
 
                     try {
-                        Log.v(TAG, response.body().string());
+                        String jsonData = response.body().string();
+                        Log.v(TAG, jsonData);
                         if (response.isSuccessful()) {
-
+                            mCurrentWeather = getCurrentDetails(jsonData);
                         } else {
                             alertUserAboutError(ERROR_DATA);
                         }
-                    } catch (IOException e) {
+                    }
+                    catch (IOException e) {
+                        Log.e(TAG, "Exception caught: ", e);
+                    }
+                    catch (JSONException e) {
                         Log.e(TAG, "Exception caught: ", e);
                     }
                 }
@@ -67,6 +76,26 @@ public class MainActivity extends Activity {
         else {
             alertUserAboutError(ERROR_NETWORK);
         }
+    }
+
+    private CurrentWeather getCurrentDetails(String jsonData) throws JSONException {
+        JSONObject forecast = new JSONObject(jsonData);
+        JSONObject weather = forecast.getJSONObject("currently");
+        String timeZone = weather.getString("summary");
+        Log.i(TAG, "From JSON:" + timeZone);
+
+        CurrentWeather currentWeather = new CurrentWeather();
+        currentWeather.setHumidity(weather.getDouble("humidity"));
+        currentWeather.setSummary(weather.getString("summary"));
+        currentWeather.setTime(weather.getLong("time"));
+        currentWeather.setIcon(weather.getString("icon"));
+        currentWeather.setTemperature(weather.getDouble("temperature"));
+        currentWeather.setPercipChance(weather.getDouble("precipProbability"));
+        currentWeather.setTimeZone(timeZone);
+
+        Log.d(TAG, currentWeather.getFormattedTime());
+
+        return currentWeather;
     }
 
     private boolean isNetworkAvailable() {
