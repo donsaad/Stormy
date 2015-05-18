@@ -1,10 +1,12 @@
-package com.lotum;
+package com.lotum.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
+
+import com.lotum.R;
 
 /**
  * Created by Saad on 06/05/2015.
