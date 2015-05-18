@@ -1,4 +1,4 @@
-package com.stormy;
+package com.lotum;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

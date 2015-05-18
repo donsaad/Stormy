@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.stormy"
+        applicationId "com.lotum"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1

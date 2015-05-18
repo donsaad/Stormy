@@ -1,4 +1,4 @@
-package com.stormy;
+package com.lotum;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
