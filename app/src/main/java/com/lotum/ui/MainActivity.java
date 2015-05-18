@@ -2,24 +2,30 @@ package com.lotum.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.lotum.R;
 import com.lotum.weather.Current;
+import com.lotum.weather.Daily;
+import com.lotum.weather.Forecast;
+import com.lotum.weather.Hourly;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,7 +37,7 @@ public class MainActivity extends Activity {
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final String ERROR_DATA = "data_exception";
     public static final String ERROR_NETWORK = "network_unavailable";
-    private Current mCurrent;
+    private Forecast mForecast;
 
     private TextView mTimeLabel;
     private TextView mTemperatureLabel;
@@ -41,6 +47,7 @@ public class MainActivity extends Activity {
     private ImageView mIconImage;
     private ImageView mRefreshImage;
     private ProgressBar mProgressBar;
+    private Button m7days;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +62,7 @@ public class MainActivity extends Activity {
         mIconImage = (ImageView) findViewById(R.id.img_icon);
         mRefreshImage = (ImageView) findViewById(R.id.img_refresh);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        m7days = (Button) findViewById(R.id.btn_daily);
 
         mProgressBar.setVisibility(View.INVISIBLE);
 
@@ -62,6 +70,13 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 getForecast();
+            }
+        });
+
+        m7days.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DailyForecastActivity.class));
             }
         });
 
@@ -108,7 +123,7 @@ public class MainActivity extends Activity {
                         String jsonData = response.body().string();
                         Log.v(TAG, jsonData);
                         if (response.isSuccessful()) {
-                            mCurrent = getCurrentDetails(jsonData);
+                            mForecast = parseForecastDetails(jsonData);
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -143,22 +158,75 @@ public class MainActivity extends Activity {
     }
 
     private void updateDisplay() {
-        mTemperatureLabel.setText(Integer.toString(mCurrent.getTemperature()));
-        mTimeLabel.setText("At " + mCurrent.getFormattedTime() + " it will be");
-        mHumidityValue.setText(Double.toString(mCurrent.getHumidity()));
-        mPrecipValue.setText(mCurrent.getPercipChance() + "%");
-        mSummaryLabel.setText(mCurrent.getSummary());
+        Current current = mForecast.getCurrentForecast();
+        mTemperatureLabel.setText(Integer.toString(current.getTemperature()));
+        mTimeLabel.setText("At " + current.getFormattedTime() + " it will be");
+        mHumidityValue.setText(Double.toString(current.getHumidity()));
+        mPrecipValue.setText(current.getPercipChance() + "%");
+        mSummaryLabel.setText(current.getSummary());
 
-        Drawable drawable = getResources().getDrawable(mCurrent.getIconId());
+        Drawable drawable = getResources().getDrawable(current.getIconId());
         mIconImage.setImageDrawable(drawable);
+    }
+
+    private Forecast parseForecastDetails(String jsonData) throws JSONException {
+        Forecast forecast = new Forecast();
+        forecast.setCurrentForecast(getCurrentDetails(jsonData));
+        forecast.setHourlyForecast(getHourlyDetails(jsonData));
+        forecast.setDailyForecast(getDailyDetails(jsonData));
+        return forecast;
+    }
+
+    private Daily[] getDailyDetails(String jsonData) throws JSONException {
+        JSONObject forecast = new JSONObject(jsonData);
+        String timeZone = forecast.getString("timezone");
+
+        JSONObject daily = forecast.getJSONObject("daily");
+        JSONArray data = daily.getJSONArray("data");
+
+        int length = data.length();
+        Daily[] dailyData = new Daily[length];
+        for (int i = 0; i < length; i++) {
+            JSONObject jsonDay = data.getJSONObject(i);
+
+            dailyData[i] = new Daily();
+            dailyData[i].setSummary(jsonDay.getString("summary"));
+            dailyData[i].setTemperatureMax(jsonDay.getDouble("temperatureMax"));
+            dailyData[i].setTime(jsonDay.getLong("time"));
+            dailyData[i].setIcon(jsonDay.getString("icon"));
+            dailyData[i].setTimezone(timeZone);
+        }
+        return dailyData;
+    }
+
+    private Hourly[] getHourlyDetails(String jsonData) throws JSONException {
+        JSONObject forecast = new JSONObject(jsonData);
+        String timeZone = forecast.getString("timezone");
+
+        JSONObject hourly = forecast.getJSONObject("hourly");
+        JSONArray data = hourly.getJSONArray("data");
+
+        int length = data.length();
+        Hourly[] hourlyData = new Hourly[length];
+        for (int i = 0; i < length; i++) {
+            JSONObject jsonHour = data.getJSONObject(i);
+
+            hourlyData[i] = new Hourly();
+            hourlyData[i].setSummary(jsonHour.getString("summary"));
+            hourlyData[i].setTemperature(jsonHour.getDouble("temperature"));
+            hourlyData[i].setTime(jsonHour.getLong("time"));
+            hourlyData[i].setIcon(jsonHour.getString("icon"));
+            hourlyData[i].setTimezone(timeZone);
+        }
+        return hourlyData;
     }
 
     private Current getCurrentDetails(String jsonData) throws JSONException {
         JSONObject forecast = new JSONObject(jsonData);
-        JSONObject weather = forecast.getJSONObject("currently");
-        String timeZone = weather.getString("summary");
+        String timeZone = forecast.getString("timezone");
         Log.i(TAG, "From JSON:" + timeZone);
 
+        JSONObject weather = forecast.getJSONObject("currently");
         Current current = new Current();
         current.setHumidity(weather.getDouble("humidity"));
         current.setSummary(weather.getString("summary"));
