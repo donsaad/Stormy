@@ -1,5 +1,9 @@
 package com.lotum.weather;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 /**
  * Created by Saad on 18/05/2015.
  */
@@ -26,8 +30,8 @@ public class Daily {
         mSummary = summary;
     }
 
-    public double getTemperatureMax() {
-        return mTemperatureMax;
+    public int getTemperatureMax() {
+        return (int) Math.round(mTemperatureMax);
     }
 
     public void setTemperatureMax(double temperatureMax) {
@@ -48,5 +52,17 @@ public class Daily {
 
     public void setTimezone(String timezone) {
         mTimezone = timezone;
+    }
+
+    public int getIconId() {
+        return Forecast.getIconId(mIcon);
+    }
+
+    public String getDayOfTheWeek() {
+        SimpleDateFormat formatter = new SimpleDateFormat("EEEE");
+        formatter.setTimeZone(TimeZone.getTimeZone(mTimezone));
+        Date dateTime = new Date(mTime*1000);
+
+        return formatter.format(dateTime);
     }
 }
