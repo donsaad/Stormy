@@ -5,8 +5,8 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
-                android:paddingLeft="64dp"
-                android:paddingRight="32dp"
+                android:paddingLeft="44dp"
+                android:paddingRight="12dp"
                 tools:background="#aaf3">
 
     <ImageView

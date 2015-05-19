@@ -9,21 +9,55 @@
                 tools:context="com.lotum.ui.DailyForecastActivity"
                 android:background="#ff76bee7">
 
-
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@android:id/list"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_below="@+id/tv_this_week_label"
+        android:layout_above="@+id/tv_daily_location"
+        >
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@android:id/list"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_daily_data"
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:id="@android:id/empty"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This Week&apos;s Weather"
+        android:id="@+id/tv_this_week_label"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="27sp"
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cairo, Egypt"
+        android:id="@+id/tv_daily_location"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
+        />
 </RelativeLayout>

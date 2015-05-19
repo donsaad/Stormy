@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final String ERROR_DATA = "data_exception";
     public static final String ERROR_NETWORK = "network_unavailable";
+    public static final String DAILY_FORECAST = "DAILY_FORECAST";
     private Forecast mForecast;
 
     private TextView mTimeLabel;
@@ -76,7 +77,9 @@ public class MainActivity extends Activity {
         m7days.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, DailyForecastActivity.class));
+                Intent intent = new Intent(MainActivity.this, DailyForecastActivity.class);
+                intent.putExtra(DAILY_FORECAST, mForecast.getDailyForecast());
+                startActivity(intent);
             }
         });
 
