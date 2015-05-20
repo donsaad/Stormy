@@ -17,6 +17,8 @@ public class Daily implements Parcelable {
     private String mIcon;
     private String mTimezone;
 
+    public Daily() { }
+
     public long getTime() {
         return mTime;
     }
@@ -91,7 +93,6 @@ public class Daily implements Parcelable {
         mTimezone = in.readString();
     }
 
-    public Daily() { }
 
     public static final Parcelable.Creator<Daily> CREATOR = new Parcelable.Creator<Daily>() {
         @Override

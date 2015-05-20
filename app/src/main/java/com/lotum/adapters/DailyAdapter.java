@@ -45,7 +45,7 @@ public class DailyAdapter extends BaseAdapter {
         if(convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.daily_list_item, null);
             holder = new ViewHolder();
-            holder.icon = (ImageView) convertView.findViewById(R.id.img_item_icon);
+            holder.icon = (ImageView) convertView.findViewById(R.id.img_daily_item_icon);
             holder.tempLabel = (TextView) convertView.findViewById(R.id.tv_temp_label);
             holder.dayLabel = (TextView) convertView.findViewById(R.id.tv_day_label);
 

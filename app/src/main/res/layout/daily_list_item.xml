@@ -21,7 +21,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/img_item_icon"
+        android:id="@+id/img_daily_item_icon"
         android:src="@drawable/clear_night"
         android:layout_toRightOf="@+id/img_circle"
         android:layout_toEndOf="@+id/img_circle"
@@ -35,8 +35,8 @@
         android:textColor="#ffffff"
         android:id="@+id/tv_day_label"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/img_item_icon"
-        android:layout_toEndOf="@+id/img_item_icon"
+        android:layout_toRightOf="@+id/img_daily_item_icon"
+        android:layout_toEndOf="@+id/img_daily_item_icon"
         android:paddingLeft="9dp"
         tools:text="Monday"/>
 

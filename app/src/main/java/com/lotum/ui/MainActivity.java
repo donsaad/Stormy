@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
     public static final String ERROR_DATA = "data_exception";
     public static final String ERROR_NETWORK = "network_unavailable";
     public static final String DAILY_FORECAST = "DAILY_FORECAST";
+    public static final String HOURLY_FORECAST = "HOURLY_FORECAST";
     private Forecast mForecast;
 
     private TextView mTimeLabel;
@@ -48,7 +49,8 @@ public class MainActivity extends Activity {
     private ImageView mIconImage;
     private ImageView mRefreshImage;
     private ProgressBar mProgressBar;
-    private Button m7days;
+    private Button mDaily;
+    private Button mHourly;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,8 @@ public class MainActivity extends Activity {
         mIconImage = (ImageView) findViewById(R.id.img_icon);
         mRefreshImage = (ImageView) findViewById(R.id.img_refresh);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        m7days = (Button) findViewById(R.id.btn_daily);
+        mDaily = (Button) findViewById(R.id.btn_daily);
+        mHourly = (Button) findViewById(R.id.btn_hourly);
 
         mProgressBar.setVisibility(View.INVISIBLE);
 
@@ -74,11 +77,20 @@ public class MainActivity extends Activity {
             }
         });
 
-        m7days.setOnClickListener(new View.OnClickListener() {
+        mDaily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DailyForecastActivity.class);
                 intent.putExtra(DAILY_FORECAST, mForecast.getDailyForecast());
+                startActivity(intent);
+            }
+        });
+
+        mHourly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HourlyForecastActivity.class);
+                intent.putExtra(HOURLY_FORECAST, mForecast.getHourlyForecast());
                 startActivity(intent);
             }
         });
