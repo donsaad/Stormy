@@ -29,7 +29,7 @@ public class HourlyForecastActivity extends ActionBarActivity {
         Parcelable[] parcelables = getIntent().getParcelableArrayExtra(MainActivity.HOURLY_FORECAST);
         mHours = Arrays.copyOf(parcelables, parcelables.length, Hourly[].class);
 
-        HourlyAdapter adapter = new HourlyAdapter(mHours);
+        HourlyAdapter adapter = new HourlyAdapter(this, mHours);
         mRecyclerView.setAdapter(adapter);
 
         // LinearLayoutManager for vertical and horizontal lists like our case here

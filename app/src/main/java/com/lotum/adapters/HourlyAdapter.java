@@ -1,11 +1,13 @@
 package com.lotum.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lotum.R;
 import com.lotum.weather.Hourly;
@@ -16,8 +18,10 @@ import com.lotum.weather.Hourly;
 public class HourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.MyViewHolder> {
 
     private Hourly[] mHours;
+    private Context mContext;
 
-    public HourlyAdapter(Hourly[] hours) {
+    public HourlyAdapter(Context context, Hourly[] hours) {
+        mContext = context;
         mHours = hours;
     }
 
@@ -42,7 +46,7 @@ public class HourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.MyViewHold
         return mHours.length;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView mTimeLabel;
         public TextView mSummaryLabel;
@@ -56,6 +60,8 @@ public class HourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.MyViewHold
             mSummaryLabel = (TextView) itemView.findViewById(R.id.tv_hourly_summary_label);
             mTemperatureLabel = (TextView) itemView.findViewById(R.id.tv_hourly_temp_label);
             mIconImage = (ImageView) itemView.findViewById(R.id.img_hourly_item_icon);
+
+            itemView.setOnClickListener(this);
         }
 
         public void bindData(Hourly hourlyData) {
@@ -63,6 +69,15 @@ public class HourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.MyViewHold
             mSummaryLabel.setText(hourlyData.getSummary());
             mTemperatureLabel.setText(hourlyData.getTemperature() + "");
             mIconImage.setImageResource(hourlyData.getIconId());
+        }
+
+        @Override
+        public void onClick(View v) {
+            String time = mTimeLabel.getText().toString();
+            String temp = mTemperatureLabel.getText().toString();
+            String condition = mSummaryLabel.getText().toString();
+            String message = String.format("At %s it will be %s and %s", time, temp, condition);
+            Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
         }
     }
 }
