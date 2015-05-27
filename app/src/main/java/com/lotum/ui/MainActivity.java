@@ -99,11 +99,10 @@ public class MainActivity extends Activity {
     }
 
     private void getForecast() {
-        String apiKey = "ecd27683ebc9adbc2921c2b44d9924c4";
 
         double latitude = 30.2801;
         double longitude = 31.1106;
-        String forecastUrl = "https://api.forecast.io/forecast/" + apiKey +
+        String forecastUrl = "https://api.forecast.io/forecast/" + getResources().getString(R.string.api_key) +
                 "/" + latitude + "," + longitude;
 
         if (isNetworkAvailable()) {
