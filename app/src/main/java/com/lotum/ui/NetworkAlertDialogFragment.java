@@ -10,6 +10,7 @@ import com.lotum.R;
 
 /**
  * Created by Saad on 06/05/2015.
+ *
  */
 public class NetworkAlertDialogFragment extends DialogFragment {
 

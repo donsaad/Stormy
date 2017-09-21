@@ -4,6 +4,7 @@ import com.lotum.R;
 
 /**
  * Created by Saad on 18/05/2015.
+ *
  */
 public class Forecast {
     private Current mCurrentForecast;

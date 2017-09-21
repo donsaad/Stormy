@@ -10,4 +10,5 @@
     <string name="title_activity_daily_forecast">DailyForecastActivity</string>
     <string name="no_daily_data">No data to display!</string>
     <string name="title_activity_hourly_forecast">HourlyForecastActivity</string>
+    <string name="api_key">ecd27683ebc9adbc2921c2b44d9924c4</string>
 </resources>

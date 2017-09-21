@@ -1,5 +1,7 @@
 # Gradle generated files
 .gradle
+gradle.properties
+/gradle.properties
 
 # Built application files
 /*/build/
@@ -8,19 +10,9 @@
 # Local configuration file (sdk path, etc)
 /local.properties
 
-# User-specific configurations
-/.idea/workspace.xml
-/.idea/libraries
+# User-specific configurations (Intellij IDEA files)
+.idea/
 *.iml
-.idea/compiler.xml
-.idea/copyright/profiles_settings.xml
-.idea/scopes/scope_settings.xml
-.idea/tasks.xml
-.idea/.name
-.idea/vcs.xml
-.idea/encodings.xml
-.idea/misc.xml
-.idea/modules.xml
 
 # Signing files
 .signing/
@@ -29,4 +21,5 @@
 .DS_Store
 .DS_Store?
 
-/values/keys.xml
+# Other
+/captures

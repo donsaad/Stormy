@@ -13,6 +13,7 @@ import com.lotum.weather.Daily;
 
 /**
  * Created by Saad on 19/05/2015.
+ *
  */
 public class DailyAdapter extends BaseAdapter {
     private Context mContext;
@@ -43,7 +44,7 @@ public class DailyAdapter extends BaseAdapter {
         ViewHolder holder;
 
         if(convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.daily_list_item, null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.daily_list_item, parent, false);
             holder = new ViewHolder();
             holder.icon = (ImageView) convertView.findViewById(R.id.img_daily_item_icon);
             holder.tempLabel = (TextView) convertView.findViewById(R.id.tv_temp_label);

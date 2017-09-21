@@ -14,6 +14,7 @@ import com.lotum.weather.Hourly;
 
 /**
  * Created by Saad on 20/05/2015.
+ *
  */
 public class HourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.MyViewHolder> {
 

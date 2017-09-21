@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.lotum.BuildConfig;
 import com.lotum.R;
 import com.lotum.weather.Current;
 import com.lotum.weather.Daily;
@@ -30,7 +31,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-
 
 public class MainActivity extends Activity {
 
@@ -57,6 +57,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initViews();
+
+        getForecast();
+    }
+
+    private void initViews() {
         mTimeLabel = (TextView) findViewById(R.id.tv_time);
         mTemperatureLabel = (TextView) findViewById(R.id.tv_temperature);
         mHumidityValue = (TextView) findViewById(R.id.tv_humidity_value);
@@ -94,15 +100,13 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
-
-        getForecast();
     }
 
     private void getForecast() {
 
         double latitude = 30.2801;
         double longitude = 31.1106;
-        String forecastUrl = "https://api.forecast.io/forecast/" + getResources().getString(R.string.api_key) +
+        String forecastUrl = "https://api.forecast.io/forecast/"  +
                 "/" + latitude + "," + longitude;
 
         if (isNetworkAvailable()) {
@@ -154,18 +158,16 @@ public class MainActivity extends Activity {
                     }
                 }
             });
-        }
-        else {
+        } else {
             alertUserAboutError(ERROR_NETWORK);
         }
     }
 
     private void toggleRefresh() {
-        if(mProgressBar.getVisibility() == View.INVISIBLE) {
+        if (mProgressBar.getVisibility() == View.INVISIBLE) {
             mProgressBar.setVisibility(View.VISIBLE);
             mRefreshImage.setVisibility(View.INVISIBLE);
-        }
-        else {
+        } else {
             mProgressBar.setVisibility(View.INVISIBLE);
             mRefreshImage.setVisibility(View.VISIBLE);
         }
@@ -258,18 +260,17 @@ public class MainActivity extends Activity {
     private boolean isNetworkAvailable() {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
-        if(networkInfo != null && networkInfo.isConnected()) {
+        if (networkInfo != null && networkInfo.isConnected()) {
             return true;
         }
         return false;
     }
 
     private void alertUserAboutError(String error) {
-        if(error.equals(ERROR_DATA)) {
+        if (error.equals(ERROR_DATA)) {
             DataAlertDialogFragment dialog = new DataAlertDialogFragment();
             dialog.show(getFragmentManager(), "error_dialog");
-        }
-        else if(error.equals(ERROR_NETWORK)) {
+        } else if (error.equals(ERROR_NETWORK)) {
             NetworkAlertDialogFragment dialog = new NetworkAlertDialogFragment();
             dialog.show(getFragmentManager(), "error_dialog");
         }

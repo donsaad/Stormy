@@ -3,6 +3,7 @@ package com.lotum.ui;
 import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -14,7 +15,7 @@ import com.lotum.weather.Hourly;
 
 import java.util.Arrays;
 
-public class HourlyForecastActivity extends ActionBarActivity {
+public class HourlyForecastActivity extends AppCompatActivity {
 
     private Hourly[] mHours;
     private RecyclerView mRecyclerView;

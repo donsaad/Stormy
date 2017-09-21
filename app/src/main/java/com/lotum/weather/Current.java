@@ -1,13 +1,12 @@
 package com.lotum.weather;
 
-import com.lotum.R;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
 /**
  * Created by Saad on 07/05/2015.
+ *
  */
 public class Current {
 
