@@ -106,7 +106,7 @@ public class MainActivity extends Activity {
 
         double latitude = 30.2801;
         double longitude = 31.1106;
-        String forecastUrl = "https://api.forecast.io/forecast/"  +
+        String forecastUrl = "https://api.forecast.io/forecast/" + BuildConfig.API_KEY +
                 "/" + latitude + "," + longitude;
 
         if (isNetworkAvailable()) {
@@ -151,9 +151,7 @@ public class MainActivity extends Activity {
                         } else {
                             alertUserAboutError(ERROR_DATA);
                         }
-                    } catch (IOException e) {
-                        Log.e(TAG, "Exception caught: ", e);
-                    } catch (JSONException e) {
+                    } catch (IOException | JSONException e) {
                         Log.e(TAG, "Exception caught: ", e);
                     }
                 }

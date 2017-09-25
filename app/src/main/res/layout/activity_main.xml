@@ -4,7 +4,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
-                android:background="#042853">
+                android:background="@drawable/september">
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="39dp"
         android:textSize="24sp"
-        android:textColor="@android:color/white"
+        android:textColor="@color/prim_text"
         android:layout_marginTop="7dp"/>
 
     <ImageView
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:text="HUMIDITY"
                 android:id="@+id/tv_humidity"
-                android:textColor="#80ffffff"
+                android:textColor="@color/prim_text"
                 android:gravity="center_horizontal"/>
 
             <TextView
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:text="--"
                 android:id="@+id/tv_humidity_value"
-                android:textColor="@android:color/white"
+                android:textColor="@color/prim_text"
                 android:textSize="24sp"
                 android:gravity="center_horizontal"/>
         </LinearLayout>
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:text="RAIN/SNOW"
                 android:id="@+id/tv_precip"
-                android:textColor="#80ffffff"
+                android:textColor="@color/prim_text"
                 android:gravity="center_horizontal"/>
 
             <TextView
@@ -111,7 +111,7 @@
                 android:text="--"
                 android:id="@+id/tv_precip_value"
                 android:textSize="24sp"
-                android:textColor="@android:color/white"
+                android:textColor="@color/prim_text"
                 android:gravity="center_horizontal"/>
         </LinearLayout>
     </LinearLayout>
@@ -162,7 +162,7 @@
             android:id="@+id/btn_hourly"
             android:layout_weight="1"
             android:background="#40FFFFFF"
-            android:textColor="#FFF"
+            android:textColor="@color/prim_text"
             android:layout_marginRight="4dp"/>
 
         <Button
@@ -171,7 +171,7 @@
             android:text="7 DAY"
             android:id="@+id/btn_daily"
             android:layout_weight="1"
-            android:textColor="#FFF"
+            android:textColor="@color/prim_text"
             android:background="#40FFFFFF"/>
     </LinearLayout>
 </RelativeLayout>
