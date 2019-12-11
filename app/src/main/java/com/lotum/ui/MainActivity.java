@@ -49,8 +49,6 @@ public class MainActivity extends Activity {
     private ImageView mIconImage;
     private ImageView mRefreshImage;
     private ProgressBar mProgressBar;
-    private Button mDaily;
-    private Button mHourly;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,16 +61,16 @@ public class MainActivity extends Activity {
     }
 
     private void initViews() {
-        mTimeLabel = (TextView) findViewById(R.id.tv_time);
-        mTemperatureLabel = (TextView) findViewById(R.id.tv_temperature);
-        mHumidityValue = (TextView) findViewById(R.id.tv_humidity_value);
-        mPrecipValue = (TextView) findViewById(R.id.tv_precip_value);
-        mSummaryLabel = (TextView) findViewById(R.id.tv_summary);
-        mIconImage = (ImageView) findViewById(R.id.img_icon);
-        mRefreshImage = (ImageView) findViewById(R.id.img_refresh);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mDaily = (Button) findViewById(R.id.btn_daily);
-        mHourly = (Button) findViewById(R.id.btn_hourly);
+        mTimeLabel = findViewById(R.id.tv_time);
+        mTemperatureLabel = findViewById(R.id.tv_temperature);
+        mHumidityValue = findViewById(R.id.tv_humidity_value);
+        mPrecipValue = findViewById(R.id.tv_precip_value);
+        mSummaryLabel = findViewById(R.id.tv_summary);
+        mIconImage = findViewById(R.id.img_icon);
+        mRefreshImage = findViewById(R.id.img_refresh);
+        mProgressBar = findViewById(R.id.progressBar);
+        Button daily = findViewById(R.id.btn_daily);
+        Button hourly = findViewById(R.id.btn_hourly);
 
         mProgressBar.setVisibility(View.INVISIBLE);
 
@@ -83,7 +81,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        mDaily.setOnClickListener(new View.OnClickListener() {
+        daily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DailyForecastActivity.class);
@@ -92,7 +90,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        mHourly.setOnClickListener(new View.OnClickListener() {
+        hourly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, HourlyForecastActivity.class);
@@ -130,7 +128,7 @@ public class MainActivity extends Activity {
                 }
 
                 @Override
-                public void onResponse(Response response) throws IOException {
+                public void onResponse(Response response) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -257,11 +255,10 @@ public class MainActivity extends Activity {
 
     private boolean isNetworkAvailable() {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            return true;
-        }
-        return false;
+        NetworkInfo networkInfo = null;
+        if(manager != null)
+            networkInfo = manager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 
     private void alertUserAboutError(String error) {

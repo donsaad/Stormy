@@ -4,7 +4,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
-                android:background="@drawable/september">
+                android:background="@color/colorPrimary">
 
     <TextView
         android:layout_width="wrap_content"
@@ -146,32 +146,32 @@
         android:indeterminate="false"/>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/tv_summary"
-        android:gravity="bottom">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_hourly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="HOURLY"
-            android:id="@+id/btn_hourly"
+            android:layout_marginRight="4dp"
             android:layout_weight="1"
             android:background="#40FFFFFF"
-            android:textColor="@color/prim_text"
-            android:layout_marginRight="4dp"/>
+            android:text="HOURLY"
+            android:textColor="@color/prim_text" />
 
         <Button
+            android:id="@+id/btn_daily"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="7 DAY"
-            android:id="@+id/btn_daily"
             android:layout_weight="1"
-            android:textColor="@color/prim_text"
-            android:background="#40FFFFFF"/>
+            android:background="#40FFFFFF"
+            android:text="7 DAY"
+            android:textColor="@color/prim_text" />
     </LinearLayout>
 </RelativeLayout>
