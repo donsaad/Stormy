@@ -10,4 +10,13 @@
     <string name="title_activity_daily_forecast">DailyForecastActivity</string>
     <string name="no_daily_data">No data to display!</string>
     <string name="title_activity_hourly_forecast">HourlyForecastActivity</string>
+    <string name="hourly">HOURLY</string>
+    <string name="_7_day">7 DAY</string>
+    <string name="refresh">Refresh</string>
+    <string name="weather_icon">Weather Icon</string>
+    <string name="degree_icon">Degree Icon</string>
+    <string name="rain_snow">RAIN/SNOW</string>
+    <string name="humidity">HUMIDITY</string>
+    <string name="N_A">N/A</string>
+    <string name="cairo_egypt">Cairo, Egypt</string>
 </resources>
