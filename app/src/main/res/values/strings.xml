@@ -19,4 +19,5 @@
     <string name="humidity">HUMIDITY</string>
     <string name="N_A">N/A</string>
     <string name="cairo_egypt">Cairo, Egypt</string>
+    <string name="disconnected">You\'re disconnected Turn on cellular data or use Wi-Fi.</string>
 </resources>

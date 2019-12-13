@@ -1,6 +1,5 @@
 package com.lotum.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -13,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lotum.BuildConfig;
 import com.lotum.R;
@@ -32,7 +33,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final String ERROR_DATA = "data_exception";
@@ -53,10 +54,10 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // TODO: 12/13/2019 check network
         setContentView(R.layout.activity_main);
-
         initViews();
-
+        // TODO: 12/13/2019 get city latlan from user
         getForecast();
     }
 
@@ -73,7 +74,6 @@ public class MainActivity extends Activity {
         Button hourly = findViewById(R.id.btn_hourly);
 
         mProgressBar.setVisibility(View.INVISIBLE);
-
         mRefreshImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -264,10 +264,10 @@ public class MainActivity extends Activity {
     private void alertUserAboutError(String error) {
         if (error.equals(ERROR_DATA)) {
             DataAlertDialogFragment dialog = new DataAlertDialogFragment();
-            dialog.show(getFragmentManager(), "error_dialog");
+            dialog.show(getSupportFragmentManager(), "error_dialog");
         } else if (error.equals(ERROR_NETWORK)) {
             NetworkAlertDialogFragment dialog = new NetworkAlertDialogFragment();
-            dialog.show(getFragmentManager(), "error_dialog");
+            dialog.show(getSupportFragmentManager(), "error_dialog");
         }
     }
 }
